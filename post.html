@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post - Foodie Lover Blog</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+  <style>
+    /* Additional Styles */
+    .post-content {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .post-content h2 {
+        font-size: 2em;
+        color: #6200ea;
+    }
+
+    .post-image {
+        width: 100%;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+
+    .comment-section {
+        margin-top: 30px;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .comment {
+        margin: 10px 0;
+        padding: 10px;
+        background-color: #f1f1f1;
+        border-left: 4px solid #6200ea;
+        border-radius: 5px;
+    }
+
+    .comment h4 {
+        margin: 0;
+        font-size: 1.1em;
+        color: #333;
+    }
+
+    .comment p {
+        margin: 5px 0;
+        color: #666;
+    }
+
+    #comments-list {
+        margin-top: 15px;
+    }
+
+    /* Button Styles */
+    button {
+        background-color: #6200ea;
+        color: white;
+        border: none;
+        cursor: pointer;
+        padding: 10px 15px;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    button:hover {
+        background-color: #3700b3;
+    }
+
+    textarea {
+        width: calc(100% - 22px);
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        resize: none;
+    }
+  </style>
+</head>
+<body class="light-mode">
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="logo">🍴 Foodie Lover Blog</div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="post.html">Posts</a></li>
+      <li><a href="profile.html">Profile</a></li>
+      <li><a href="login.html">Login</a></li>
+    </ul>
+  </nav>
+
+  <!-- Post Content -->
+  <section class="post-content">
+    <h2>The Best Street Food in Town</h2>
+    <img src="images/street-food.jpg" alt="Street Food" class="post-image"> 
+    <p>Street food is an integral part of the food culture in cities around the world. From sizzling kebabs to sweet desserts, each street corner has something special to offer. Here are some of the best street foods you should try:</p>
+    <ul>
+      <li><strong>Chaat:</strong> A savory snack originating from India, it's a mix of flavors and textures that will tantalize your taste buds.</li>
+      <li><strong>Tacos:</strong> Popular in Mexico, these handheld delights come with various fillings, from grilled meats to fresh veggies.</li>
+      <li><strong>Takoyaki:</strong> A famous Japanese snack made of batter and filled with octopus, served hot with a savory sauce.</li>
+      <li><strong>Crepes:</strong> French thin pancakes filled with sweet or savory ingredients, perfect for any time of the day.</li>
+    </ul>
+    <p>Posted by Vishal Abishek G on October 6, 2024</p>
+
+    <!-- Comment Section -->
+    <div class="comment-section">
+      <h3>Comments</h3>
+      <form id="comment-form" onsubmit="return addComment(event);">
+        <textarea name="comment" placeholder="Add a comment..." required></textarea><br>
+        <button type="submit">Add Comment</button>
+      </form>
+      <div id="comments-list"></div> <!-- Placeholder for comments -->
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2024 Foodie Lover Blog - Made with ❤️ for food lovers.</p>
+  </footer>
+
+  <script src="scripts.js"></script>
+  <script>
+    // JavaScript to handle comments
+    function addComment(event) {
+      event.preventDefault(); // Prevent form submission
+      const commentText = event.target.comment.value;
+      const commentsList = document.getElementById('comments-list');
+
+      // Create a new comment element
+      const commentDiv = document.createElement('div');
+      commentDiv.classList.add('comment');
+      commentDiv.innerHTML = `<h4>Anonymous</h4><p>${commentText}</p>`;
+
+      // Append the comment to the comments list
+      commentsList.appendChild(commentDiv);
+
+      // Clear the textarea
+      event.target.reset();
+    }
+  </script>
+</body>
+</html>

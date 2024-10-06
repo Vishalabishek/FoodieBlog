@@ -1,0 +1,417 @@
+/* General Styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    background-color: #ffffff; /* Light background */
+    color: #333; /* Dark text */
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #6200ea; /* Purple color for the navbar */
+    color: white;
+    padding: 15px 30px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.navbar ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.navbar ul li a:hover {
+    color: #ffeb3b; /* Light yellow on hover */
+}
+
+.navbar .logo {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+/* Hero Section */
+.hero {
+    position: relative; /* Positioning for the overlay */
+    text-align: center;
+    padding: 100px 20px;
+    background-image: url('images/food-hero.jpg'); /* Food-themed background */
+    background-size: cover;
+    color: white;
+    overflow: hidden; /* Hide overflow to maintain layout */
+    border-radius: 8px; /* Add rounded corners to hero section */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+.hero::before {
+    content: ""; /* Create an empty pseudo-element */
+    position: absolute; /* Position it absolutely within the hero */
+    top: 0;
+    left: 0;
+    width: 100%; /* Cover full width */
+    height: 100%; /* Cover full height */
+    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+    z-index: 1; /* Place it below the text */
+}
+
+.hero h1,
+.hero p {
+    position: relative; /* Position relative to stack on top of the overlay */
+    z-index: 2; /* Ensure text is above the overlay */
+}
+
+.hero h1 {
+    font-size: 48px;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+/* Light/Dark Mode */
+body.light-mode {
+    background-color: white;
+    color: black;
+}
+
+body.dark-mode {
+    background-color: #121212;
+    color: white;
+}
+
+/* Toggle Switch */
+.theme-toggle {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.theme-toggle span {
+    margin-left: 10px;
+    font-size: 16px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* Post Section */
+.post-section,
+.comment-section,
+.profile {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fefefe; /* White background for post sections */
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.post-section:hover,
+.comment-section:hover,
+.profile:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+input:focus,
+textarea:focus {
+    border-color: #6200ea; /* Highlight border color on focus */
+    outline: none;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #6200ea; /* Primary color for buttons */
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+    background-color: #3700b3; /* Darker shade on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+/* Profile */
+.profile ul {
+    list-style: none;
+}
+
+.profile ul li a {
+    text-decoration: none;
+    color: #6200ea;
+}
+
+.profile ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Auth Container */
+.auth-container {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 40px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+}
+
+/* Additional Styles */
+h2 {
+    color: #6200ea;
+    margin-bottom: 15px;
+}
+
+h3 {
+    color: #6200ea;
+    margin-bottom: 10px;
+}
+
+#char-count {
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+ 
+/* Recent Posts Section */
+.recent-posts {
+    max-width: 800px;            /* Maximum width for the section */
+    margin: 40px auto;           /* Center the section with auto margins */
+    padding: 20px;               /* Padding around the section */
+    background-color: #f9f9f9;   /* Light background color */
+    border-radius: 8px;          /* Rounded corners for the section */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+}
+
+.recent-posts h2 {
+    text-align: center;           /* Center the heading */
+    color: #6200ea;               /* Primary color for the heading */
+    margin-bottom: 20px;          /* Space below the heading */
+}
+
+.post-box {
+    background-color: #ffffff;    /* White background for individual posts */
+    border: 1px solid #ddd;        /* Light border for the box */
+    border-radius: 8px;            /* Rounded corners for the box */
+    padding: 15px;                 /* Padding inside the box */
+    margin-bottom: 20px;           /* Space below each post box */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition effects */
+}
+
+.post-box:hover {
+    transform: translateY(-5px);   /* Slightly lift the box on hover */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Increase shadow on hover */
+}
+
+.post-box h3 {
+    color: #333;                    /* Dark color for titles */
+    margin-bottom: 10px;            /* Space below the title */
+}
+
+.post-box p {
+    color: #666;                    /* Gray color for description */
+    margin-bottom: 15px;            /* Space below the description */
+}
+
+.read-more {
+    display: inline-block;          /* Allow padding and background to apply */
+    padding: 10px 15px;            /* Padding for the button */
+    background-color: #6200ea;      /* Primary button color */
+    color: white;                   /* Text color for the button */
+    text-decoration: none;          /* No underline for the link */
+    border-radius: 5px;            /* Rounded corners for the button */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transition effects */
+}
+
+.read-more:hover {
+    background-color: #3700b3;     /* Darker shade on hover */
+    transform: scale(1.05);        /* Slightly enlarge the button on hover */
+}
+
+/* Add responsive design */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column; /* Stack navbar items on small screens */
+        padding: 10px; /* Reduce padding */
+    }
+
+    .hero {
+        padding: 50px 10px; /* Adjust padding for smaller screens */
+    }
+
+    .post-section, .comment-section, .profile {
+        margin: 20px; /* Reduce margin for smaller screens */
+    }
+}
+
+.post-content {
+    margin: 20px 0;                /* Space above and below the content */
+    padding: 15px;                 /* Inner padding for better spacing */
+    background-color: #fefefe;     /* Light background for post content */
+    border-radius: 8px;            /* Rounded corners for the content box */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.post-content h2,
+.post-content h3 {
+    color: #6200ea;                 /* Primary color for headings */
+    margin-top: 20px;               /* Space above headings */
+    margin-bottom: 10px;            /* Space below headings */
+}
+
+.post-content h2 {
+    font-size: 24px;                /* Size for h2 headings */
+}
+
+.post-content h3 {
+    font-size: 20px;                /* Size for h3 headings */
+}
+
+.post-content p {
+    line-height: 1.6;               /* Improved line height for readability */
+    margin-bottom: 15px;            /* Space below paragraphs */
+    color: #444;                    /* Dark gray text for paragraphs */
+}
+
+.post-content img {
+    max-width: 100%;                /* Responsive images */
+    height: auto;                   /* Maintain aspect ratio */
+    border-radius: 5px;            /* Rounded corners for images */
+    margin: 10px 0;                /* Space above and below images */
+}
+
+.post-content blockquote {
+    border-left: 4px solid #6200ea; /* Stylish left border for blockquotes */
+    padding: 10px 20px;            /* Padding for blockquote content */
+    background-color: #f0f0f0;     /* Light gray background for blockquote */
+    margin: 20px 0;                /* Space around blockquotes */
+    font-style: italic;             /* Italic text for emphasis */
+    color: #555;                    /* Darker gray for blockquote text */
+}
+
+/* Lists */
+.post-content ul,
+.post-content ol {
+    margin: 15px 0;                /* Space above and below lists */
+    padding-left: 20px;            /* Indentation for lists */
+}
+
+.post-content li {
+    margin-bottom: 5px;            /* Space between list items */
+}
+
+/* Code Snippets */
+.post-content code {
+    background-color: #f9f9f9;     /* Light gray background for code */
+    padding: 2px 4px;              /* Padding around code */
+    border-radius: 4px;            /* Rounded corners for code */
+    font-family: 'Courier New', monospace; /* Monospace font for code */
+}
+
+.post-content pre {
+    background-color: #f9f9f9;     /* Background for preformatted text */
+    padding: 15px;                 /* Padding for preformatted text */
+    border-radius: 5px;            /* Rounded corners */
+    overflow-x: auto;              /* Scroll for long lines */
+}
+
+/* Additional Responsive Styles */
+@media (max-width: 768px) {
+    .post-content {
+        padding: 10px;             /* Reduce padding on smaller screens */
+    }
+
+    .post-content h2,
+    .post-content h3 {
+        margin-top: 15px;          /* Adjust spacing for smaller screens */
+    }
+}
+

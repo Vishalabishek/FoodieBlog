@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Foodie Lover Blog</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+  <style>
+    /* Additional Styles */
+    .featured-posts {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+        margin: 40px auto;
+        max-width: 1200px;
+    }
+
+    .featured-post {
+        position: relative;
+        overflow: hidden;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .featured-post:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .featured-post img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px 8px 0 0;
+    }
+
+    .featured-post h3 {
+        margin: 10px;
+        font-size: 20px;
+        color: #6200ea;
+    }
+
+    .subscription-form {
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .subscription-form input[type="email"] {
+        width: 80%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 2px solid #ddd;
+        border-radius: 5px;
+        transition: border-color 0.3s;
+    }
+
+    .subscription-form button {
+        background-color: #6200ea;
+        color: white;
+        border: none;
+        cursor: pointer;
+        padding: 10px 15px;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    .subscription-form button:hover {
+        background-color: #3700b3;
+    }
+  </style>
+</head>
+<body class="light-mode">
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="logo">🍴 Foodie Lover Blog </div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="post.html">Posts</a></li>
+      <li><a href="profile.html">Profile</a></li>
+      <li><a href="login.html">Login</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <h1>Welcome to Foodie Heaven</h1>
+    <p>Share your favorite recipes, food experiences, and much more.</p>
+  </header>
+
+  <!-- Theme Toggle -->
+  <div class="theme-toggle">
+    <label class="switch">
+      <input type="checkbox" id="theme-toggle">
+      <span class="slider"></span>
+    </label>
+    <span>Toggle Dark Mode</span>
+  </div>
+
+  <!-- Subscription Form -->
+  <section class="subscription-form">
+    <h2>Subscribe for Updates</h2>
+    <input type="email" placeholder="Your Email" required>
+    <button type="submit">Subscribe</button>
+  </section>
+
+  <!-- Featured Posts Section -->
+  <section class="featured-posts">
+    <div class="featured-post">
+        <img src="images/featured1.jpg" alt="Featured Post 1">
+        <h3>Delicious Pasta Recipes</h3>
+    </div>
+    <div class="featured-post">
+        <img src="images/featured2.jpg" alt="Featured Post 2">
+        <h3>Best North Indian Food</h3>
+    </div>
+    <div class="featured-post">
+        <img src="images/featured3.jpg" alt="Featured Post 3">
+        <h3>Best South Indian Food</h3>
+    </div>
+  </section>
+
+  <!-- Post Form Section -->
+  <section class="post-section">
+    <h2>Post Your Foodie Content</h2>
+    <form id="post-form">
+      <input type="text" name="title" placeholder="Post Title" required><br>
+      <textarea name="content" placeholder="Write your foodie post..." required></textarea><br>
+      <p id="char-count">0/500 characters</p>
+      <button type="submit">Submit Post</button>
+    </form>
+  </section>
+
+  <!-- Comment Section -->
+  <section class="comment-section">
+    <h3>Comments</h3>
+    <form id="comment-form">
+      <textarea name="comment" placeholder="Add a comment..." required></textarea><br>
+      <button type="submit">Add Comment</button>
+    </form>
+  </section>
+
+  <!-- Recent Posts Section -->
+  <div class="recent-posts">
+    <h2>Recent Posts</h2>
+    <div class="post-box">
+        <h3>Post Title 1</h3>
+        <p>Short description of the post content goes here.</p>
+        <a href="#" class="read-more">Read More</a>
+    </div>
+    <div class="post-box">
+        <h3>Post Title 2</h3>
+        <p>Short description of the post content goes here.</p>
+        <a href="#" class="read-more">Read More</a>
+    </div>
+    <div class="post-box">
+        <h3>Post Title 3</h3>
+        <p>Short description of the post content goes here.</p>
+        <a href="#" class="read-more">Read More</a>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2024 Foodie Lover Blog - Made with ❤️ for food lovers.</p>
+  </footer>
+
+  <script src="scripts.js"></script>
+  <script>
+    // JavaScript for character count
+    const contentInput = document.querySelector('textarea[name="content"]');
+    const charCountDisplay = document.getElementById('char-count');
+
+    contentInput.addEventListener('input', () => {
+      const currentLength = contentInput.value.length;
+      charCountDisplay.textContent = `${currentLength}/500 characters`;
+    });
+  </script>
+</body>
+</html>
