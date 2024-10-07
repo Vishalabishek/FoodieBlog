@@ -7,71 +7,165 @@
   <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap" rel="stylesheet">
   <style>
-    /* Additional Styles */
-    .featured-posts {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 20px;
-        margin: 40px auto;
-        max-width: 1200px;
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
     }
 
-    .featured-post {
-        position: relative;
-        overflow: hidden;
-        border-radius: 8px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s, box-shadow 0.3s;
+    .hero {
+      background-image: url('images/food-hero.jpg');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-align: center;
+      padding: 60px 20px;
     }
 
-    .featured-post:hover {
-        transform: scale(1.05);
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    .hero h1 {
+      font-size: 3em;
+      margin: 0;
     }
 
-    .featured-post img {
-        width: 100%;
-        height: auto;
-        border-radius: 8px 8px 0 0;
+    .hero p {
+      font-size: 1.2em;
     }
 
-    .featured-post h3 {
-        margin: 10px;
-        font-size: 20px;
-        color: #6200ea;
+    .feature-posts {
+      display: flex;
+      justify-content: space-around;
+      margin: 40px 0;
+      flex-wrap: wrap;
     }
 
-    .subscription-form {
-        max-width: 600px;
-        margin: 40px auto;
-        padding: 20px;
-        background-color: #f9f9f9;
-        border-radius: 8px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        text-align: center;
+    .post-box {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      margin: 10px;
+      padding: 20px;
+      flex-basis: 30%;
+      transition: transform 0.3s;
     }
 
-    .subscription-form input[type="email"] {
-        width: 80%;
-        padding: 10px;
-        margin-bottom: 10px;
-        border: 2px solid #ddd;
-        border-radius: 5px;
-        transition: border-color 0.3s;
+    .post-box:hover {
+      transform: translateY(-5px);
     }
 
-    .subscription-form button {
-        background-color: #6200ea;
-        color: white;
-        border: none;
-        cursor: pointer;
-        padding: 10px 15px;
-        border-radius: 5px;
-        transition: background-color 0.3s;
+    .post-box img {
+      width: 100%;
+      border-radius: 8px;
     }
 
-    .subscription-form button:hover {
-        background-color: #3700b3;
+    .carousel {
+      position: relative;
+      overflow: hidden;
+      margin: 40px auto;
+      max-width: 60%;
+      height: 300px; /* Set a height for the carousel */
+    }
+
+    .carousel-images {
+      display: flex;
+      transition: transform 0.5s ease;
+      width: 100%;
+    }
+
+    .carousel img {
+      min-width: 100%;
+      height: auto; /* Maintain aspect ratio */
+      border-radius: 8px;
+      object-fit: cover; /* Crop images to fill the space */
+      max-height: 300px; /* Limit height of images */
+    }
+
+    .newsletter {
+      background-color: #6200ea;
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+      margin: 40px 0;
+      border-radius: 8px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .newsletter::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+      transition: transform 0.3s;
+      transform: scale(1.1);
+      z-index: 0;
+    }
+
+    .newsletter h2 {
+      color: red;
+      position: relative;
+      z-index: 1;
+    }
+
+    .newsletter p {
+      position: relative;
+      z-index: 1;
+    }
+
+    .newsletter input[type="email"] {
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      width: 100%;
+      max-width: 500px;
+      margin: 10px 0;
+      transition: box-shadow 0.3s;
+      position: relative;
+      z-index: 1;
+    }
+
+    .newsletter input[type="email"]:focus {
+      box-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+      outline: none;
+    }
+
+    .newsletter button {
+      background-color: red;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 12px 12px; /* Half the size */
+      width: 20%;
+      cursor: pointer;
+      font-size: 0.8em; /* Reduced font size */
+      transition: background-color 0.3s, transform 0.3s;
+      position: relative;
+      z-index: 1;
+    }
+
+    .newsletter button:hover {
+      background-color: #3700b3;
+      transform: scale(1.05);
+    }
+
+    .social-media {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .social-media a {
+      margin: 0 10px;
+      font-size: 1.5em;
+      color: #6200ea;
+      transition: color 0.3s;
+    }
+
+    .social-media a:hover {
+      color: #3700b3;
     }
   </style>
 </head>
@@ -79,7 +173,7 @@
 
   <!-- Navigation -->
   <nav class="navbar">
-    <div class="logo">🍴 Foodie Lover Blog </div>
+    <div class="logo">🍴 Foodie Lover Blog</div>
     <ul>
       <li><a href="index.html">Home</a></li>
       <li><a href="post.html">Posts</a></li>
@@ -94,76 +188,54 @@
     <p>Share your favorite recipes, food experiences, and much more.</p>
   </header>
 
-  <!-- Theme Toggle -->
-  <div class="theme-toggle">
-    <label class="switch">
-      <input type="checkbox" id="theme-toggle">
-      <span class="slider"></span>
-    </label>
-    <span>Toggle Dark Mode</span>
+  <!-- Featured Posts Section -->
+  <section class="feature-posts">
+    <div class="post-box">
+      <img src="images/featured1.jpg" alt="Featured Post 1"> <!-- Replace with your image path -->
+      <h3>Post Title 1</h3>
+      <p>Short description of the featured post goes here. Explore this amazing recipe.</p>
+      <a href="#" class="read-more">Read More</a>
+    </div>
+    <div class="post-box">
+      <img src="images/featured2.jpg" alt="Featured Post 2"> <!-- Replace with your image path -->
+      <h3>Post Title 2</h3>
+      <p>Short description of the featured post goes here. Discover the flavors of this dish.</p>
+      <a href="#" class="read-more">Read More</a>
+    </div>
+    <div class="post-box">
+      <img src="images/featured3.jpg" alt="Featured Post 3"> <!-- Replace with your image path -->
+      <h3>Post Title 3</h3>
+      <p>Short description of the featured post goes here. A journey through taste and culture.</p>
+      <a href="#" class="read-more">Read More</a>
+    </div>
+  </section>
+
+  <!-- Recipe Showcase Carousel -->
+  <div class="carousel">
+    <div class="carousel-images" id="carousel-images">
+      <img src="images/featured1.jpg" alt="Recipe 1"> <!-- Replace with your image path -->
+      <img src="images/featured2.jpg" alt="Recipe 2"> <!-- Replace with your image path -->
+      <img src="images/featured3.jpg" alt="Recipe 3"> <!-- Replace with your image path -->
+    </div>
   </div>
 
-  <!-- Subscription Form -->
-  <section class="subscription-form">
-    <h2>Subscribe for Updates</h2>
-    <input type="email" placeholder="Your Email" required>
-    <button type="submit">Subscribe</button>
-  </section>
-
-  <!-- Featured Posts Section -->
-  <section class="featured-posts">
-    <div class="featured-post">
-        <img src="images/featured1.jpg" alt="Featured Post 1">
-        <h3>Delicious Pasta Recipes</h3>
-    </div>
-    <div class="featured-post">
-        <img src="images/featured2.jpg" alt="Featured Post 2">
-        <h3>Best North Indian Food</h3>
-    </div>
-    <div class="featured-post">
-        <img src="images/featured3.jpg" alt="Featured Post 3">
-        <h3>Best South Indian Food</h3>
-    </div>
-  </section>
-
-  <!-- Post Form Section -->
-  <section class="post-section">
-    <h2>Post Your Foodie Content</h2>
-    <form id="post-form">
-      <input type="text" name="title" placeholder="Post Title" required><br>
-      <textarea name="content" placeholder="Write your foodie post..." required></textarea><br>
-      <p id="char-count">0/500 characters</p>
-      <button type="submit">Submit Post</button>
+  <!-- Newsletter Subscription Section -->
+  <div class="newsletter">
+    <h2>Subscribe to Our Newsletter</h2>
+    <p>Get the latest recipes and food stories delivered to your inbox!</p>
+    <form id="newsletter-form" onsubmit="subscribeNewsletter(event);">
+      <input type="email" placeholder="Enter your email" required>
+      <button type="submit">Subscribe</button>
     </form>
-  </section>
+  </div>
 
-  <!-- Comment Section -->
-  <section class="comment-section">
-    <h3>Comments</h3>
-    <form id="comment-form">
-      <textarea name="comment" placeholder="Add a comment..." required></textarea><br>
-      <button type="submit">Add Comment</button>
-    </form>
-  </section>
-
-  <!-- Recent Posts Section -->
-  <div class="recent-posts">
-    <h2>Recent Posts</h2>
-    <div class="post-box">
-        <h3>Post Title 1</h3>
-        <p>Short description of the post content goes here.</p>
-        <a href="#" class="read-more">Read More</a>
-    </div>
-    <div class="post-box">
-        <h3>Post Title 2</h3>
-        <p>Short description of the post content goes here.</p>
-        <a href="#" class="read-more">Read More</a>
-    </div>
-    <div class="post-box">
-        <h3>Post Title 3</h3>
-        <p>Short description of the post content goes here.</p>
-        <a href="#" class="read-more">Read More</a>
-    </div>
+  <!-- Social Media Links -->
+  <div class="social-media">
+    <h3>Follow Us</h3>
+    <a href="#"><i class="fab fa-facebook-f"></i></a>
+    <a href="#"><i class="fab fa-twitter"></i></a>
+    <a href="#"><i class="fab fa-instagram"></i></a>
+    <a href="#"><i class="fab fa-pinterest"></i></a>
   </div>
 
   <footer>
@@ -172,14 +244,32 @@
 
   <script src="scripts.js"></script>
   <script>
-    // JavaScript for character count
-    const contentInput = document.querySelector('textarea[name="content"]');
-    const charCountDisplay = document.getElementById('char-count');
+    // Carousel functionality
+    let currentSlide = 0;
 
-    contentInput.addEventListener('input', () => {
-      const currentLength = contentInput.value.length;
-      charCountDisplay.textContent = `${currentLength}/500 characters`;
-    });
+    function moveSlide(direction) {
+      const slides = document.querySelectorAll('.carousel-images img');
+      const totalSlides = slides.length;
+      currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+      const offset = -currentSlide * 100;
+      document.getElementById('carousel-images').style.transform = `translateX(${offset}%)`;
+    }
+
+    // Automatically move to the next slide every 1 second
+    setInterval(() => {
+      moveSlide(1);
+    }, 3000); // 1000 milliseconds = 1 second
+
+    // Newsletter subscription function
+    function subscribeNewsletter(event) {
+      event.preventDefault(); // Prevent form submission
+      const email = event.target[0].value;
+      alert(`Thank you for subscribing with the email: ${email}`);
+      event.target.reset(); // Clear the form
+    }
   </script>
+
+  <!-- Font Awesome CDN for social media icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </body>
 </html>

@@ -1,43 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Profile - Foodie Lover Blog</title>
-  <link rel="stylesheet" href="styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Foodie Lover Blog</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: #6200ea;
+            padding: 10px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar .logo {
+            font-size: 1.5em;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar ul li {
+            margin-left: 20px;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .navbar ul li a:hover {
+            color: #ffeb3b;
+        }
+
+        .profile {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile h2 {
+            text-align: center;
+            color: #6200ea;
+        }
+
+        .profile img {
+            display: block;
+            margin: 0 auto 20px;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid #6200ea;
+        }
+
+        .profile p {
+            font-size: 1.1em;
+            line-height: 1.5;
+        }
+
+        .favorite-dishes {
+            margin-top: 30px;
+        }
+
+        .favorite-dishes h3 {
+            margin-bottom: 10px;
+        }
+
+        .dishes-list {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .dish {
+            background-color: #f1f1f1;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+            flex-basis: 30%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .dish:hover {
+            transform: scale(1.05);
+        }
+
+        .edit-button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #6200ea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+
+        .edit-button:hover {
+            background-color: #3700b3;
+        }
+
+        footer {
+            text-align: center;
+            margin: 20px 0;
+            color: #888;
+        }
+    </style>
 </head>
+
 <body class="light-mode">
 
-  <!-- Navigation -->
-  <nav class="navbar">
-    <div class="logo">🍴 Foodie Lover Blog</div>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="post.html">Posts</a></li>
-      <li><a href="profile.html">Profile</a></li>
-      <li><a href="login.html">Login</a></li>
-    </ul>
-  </nav>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">🍴 Foodie Lover Blog</div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="post.html">Posts</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="login.html">Login</a></li>
+        </ul>
+    </nav>
 
-  <!-- Profile Section -->
-  <div class="profile">
-    <h2>Your Profile</h2>
-    <p><strong>Name:</strong> Vishal Abishek G</p>
-    <p><strong>Email:</strong> vishal@gmail.com</p>
-    <p><strong>Bio:</strong> Food lover and street food enthusiast. Always on the lookout for the best eats!</p>
+    <!-- Profile Section -->
+    <div class="profile">
+        <img src="images/profile.jpg" alt="Profile Picture"> <!-- Replace with actual profile image path -->
+        <h2>Your Profile</h2>
+        <p><strong>Name:</strong> Vishal Abishek G</p>
+        <p><strong>Email:</strong> vishal@gmail.com</p>
+        <p><strong>Bio:</strong> Food lover and street food enthusiast. Always on the lookout for the best eats!</p>
 
-    <h3>Your Posts</h3>
-    <ul>
-      <li><a href="post.html?id=1">The Best Street Food in Town</a></li>
-      <li><a href="post.html?id=2">5 Easy Vegan Recipes</a></li>
-    </ul>
-  </div>
+        <h3>Your Posts</h3>
+        <ul>
+            <li><a href="post.html?id=1">The Best Street Food in Town</a></li>
+            <li><a href="post.html?id=2">5 Easy Vegan Recipes</a></li>
+        </ul>
 
-  <footer>
-    <p>© 2024 Foodie Lover Blog - Made with ❤️ for food lovers.</p>
-  </footer>
+        <div class="favorite-dishes">
+            <h3>Your Favorite Dishes</h3>
+            <div class="dishes-list">
+                <div class="dish">
+                    <h4>Pasta Primavera</h4>
+                    <img src="images/pasta.jpg" alt="Pasta Primavera"> <!-- Replace with actual dish image -->
+                </div>
+                <div class="dish">
+                    <h4>Spicy Pizza</h4>
+                    <img src="images/pizza.jpg" alt="Spicy Tacos"> <!-- Replace with actual dish image -->
+                </div>
+                <div class="dish">
+                    <h4>Chocolate Cake</h4>
+                    <img src="images/cake.jpg" alt="Chocolate Cake"> <!-- Replace with actual dish image -->
+                </div>
+            </div>
+        </div>
 
-  <script src="scripts.js"></script>
+        <div class="recent-activities">
+            <h3>Recent Activities</h3>
+            <ul>
+                <li>Commented on <a href="post.html?id=3">The Best Dessert Places</a></li>
+                <li>Liked <a href="post.html?id=4">Healthy Smoothie Recipes</a></li>
+                <li>Shared a post about <a href="post.html?id=5">Street Food Festivals</a></li>
+            </ul>
+        </div>
+
+        <button class="edit-button" onclick="location.href='edit-profile.html'">Edit Profile</button>
+    </div>
+
+    <footer>
+        <p>© 2024 Foodie Lover Blog - Made with ❤️ for food lovers.</p>
+    </footer>
+
+    <script src="scripts.js"></script>
 </body>
+
 </html>
