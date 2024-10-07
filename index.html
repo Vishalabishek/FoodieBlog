@@ -32,9 +32,15 @@
       font-size: 1.2em;
     }
 
+    .container {
+      width: 80%;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
     .feature-posts {
       display: flex;
-      justify-content: space-around;
+      justify-content: space-between;
       margin: 40px 0;
       flex-wrap: wrap;
     }
@@ -42,11 +48,12 @@
     .post-box {
       background-color: white;
       border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
       margin: 10px;
       padding: 20px;
       flex-basis: 30%;
       transition: transform 0.3s;
+      text-align: center;
     }
 
     .post-box:hover {
@@ -56,14 +63,17 @@
     .post-box img {
       width: 100%;
       border-radius: 8px;
+      margin-bottom: 15px;
     }
 
     .carousel {
       position: relative;
       overflow: hidden;
       margin: 40px auto;
-      max-width: 60%;
-      height: 300px; /* Set a height for the carousel */
+      max-width: 80%;
+      height: 300px; 
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     }
 
     .carousel-images {
@@ -74,10 +84,10 @@
 
     .carousel img {
       min-width: 100%;
-      height: auto; /* Maintain aspect ratio */
+      height: auto;
       border-radius: 8px;
-      object-fit: cover; /* Crop images to fill the space */
-      max-height: 300px; /* Limit height of images */
+      object-fit: cover; 
+      max-height: 300px; 
     }
 
     .newsletter {
@@ -91,29 +101,12 @@
       overflow: hidden;
     }
 
-    .newsletter::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.2);
-      border-radius: 8px;
-      transition: transform 0.3s;
-      transform: scale(1.1);
-      z-index: 0;
-    }
-
     .newsletter h2 {
       color: red;
-      position: relative;
-      z-index: 1;
     }
 
     .newsletter p {
-      position: relative;
-      z-index: 1;
+      margin: 10px 0;
     }
 
     .newsletter input[type="email"] {
@@ -121,16 +114,8 @@
       border: none;
       border-radius: 5px;
       width: 100%;
-      max-width: 500px;
+      max-width: 400px;
       margin: 10px 0;
-      transition: box-shadow 0.3s;
-      position: relative;
-      z-index: 1;
-    }
-
-    .newsletter input[type="email"]:focus {
-      box-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
-      outline: none;
     }
 
     .newsletter button {
@@ -138,13 +123,11 @@
       color: white;
       border: none;
       border-radius: 5px;
-      padding: 12px 12px; /* Half the size */
+      padding: 12px 20px; 
       width: 20%;
       cursor: pointer;
-      font-size: 0.8em; /* Reduced font size */
+      font-size: 1em;
       transition: background-color 0.3s, transform 0.3s;
-      position: relative;
-      z-index: 1;
     }
 
     .newsletter button:hover {
@@ -167,11 +150,64 @@
     .social-media a:hover {
       color: #3700b3;
     }
+
+    /* New styles */
+    .recipes-section, .reviews-section, .faq-section {
+      margin: 40px 0;
+      padding: 20px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .recipe {
+      display: flex;
+      justify-content: space-between;
+      margin: 20px 0;
+    }
+
+    .recipe img {
+      width: 30%;
+      border-radius: 8px;
+    }
+
+    .recipe-details {
+      width: 65%;
+    }
+
+    .review {
+      margin: 10px 0;
+      padding: 10px;
+      border: 1px solid #eee;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
+
+    .faq {
+      margin: 10px 0;
+    }
+
+    .faq h4 {
+      cursor: pointer;
+      margin: 0;
+    }
+
+    .faq p {
+      display: none;
+      margin: 5px 0 0 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #6200ea;
+      color: white;
+      margin-top: 40px;
+    }
   </style>
 </head>
 <body class="light-mode">
 
-  <!-- Navigation -->
   <nav class="navbar">
     <div class="logo">🍴 Foodie Lover Blog</div>
     <ul>
@@ -182,65 +218,121 @@
     </ul>
   </nav>
 
-  <!-- Hero Section -->
   <header class="hero">
     <h1>Welcome to Foodie Heaven</h1>
     <p>Share your favorite recipes, food experiences, and much more.</p>
   </header>
 
-  <!-- Featured Posts Section -->
-  <section class="feature-posts">
-    <div class="post-box">
-      <img src="images/featured1.jpg" alt="Featured Post 1"> <!-- Replace with your image path -->
-      <h3>Post Title 1</h3>
-      <p>Short description of the featured post goes here. Explore this amazing recipe.</p>
-      <a href="#" class="read-more">Read More</a>
-    </div>
-    <div class="post-box">
-      <img src="images/featured2.jpg" alt="Featured Post 2"> <!-- Replace with your image path -->
-      <h3>Post Title 2</h3>
-      <p>Short description of the featured post goes here. Discover the flavors of this dish.</p>
-      <a href="#" class="read-more">Read More</a>
-    </div>
-    <div class="post-box">
-      <img src="images/featured3.jpg" alt="Featured Post 3"> <!-- Replace with your image path -->
-      <h3>Post Title 3</h3>
-      <p>Short description of the featured post goes here. A journey through taste and culture.</p>
-      <a href="#" class="read-more">Read More</a>
-    </div>
-  </section>
+  <div class="container">
 
-  <!-- Recipe Showcase Carousel -->
-  <div class="carousel">
-    <div class="carousel-images" id="carousel-images">
-      <img src="images/featured1.jpg" alt="Recipe 1"> <!-- Replace with your image path -->
-      <img src="images/featured2.jpg" alt="Recipe 2"> <!-- Replace with your image path -->
-      <img src="images/featured3.jpg" alt="Recipe 3"> <!-- Replace with your image path -->
+    <section class="feature-posts">
+      <div class="post-box">
+        <img src="images/featured1.jpg" alt="Featured Post 1">
+        <h3>Post Title 1</h3>
+        <p>Short description of the featured post goes here. Explore this amazing recipe.</p>
+        <a href="#" class="read-more">Read More</a>
+      </div>
+      <div class="post-box">
+        <img src="images/featured2.jpg" alt="Featured Post 2">
+        <h3>Post Title 2</h3>
+        <p>Short description of the featured post goes here. Discover the flavors of this dish.</p>
+        <a href="#" class="read-more">Read More</a>
+      </div>
+      <div class="post-box">
+        <img src="images/featured3.jpg" alt="Featured Post 3">
+        <h3>Post Title 3</h3>
+        <p>Short description of the featured post goes here. A journey through taste and culture.</p>
+        <a href="#" class="read-more">Read More</a>
+      </div>
+    </section>
+
+    <div class="carousel">
+      <div class="carousel-images" id="carousel-images">
+        <img src="images/featured1.jpg" alt="Recipe 1">
+        <img src="images/featured2.jpg" alt="Recipe 2">
+        <img src="images/featured3.jpg" alt="Recipe 3">
+      </div>
     </div>
+
+    <section class="recipes-section">
+      <h2>Popular Recipes</h2>
+      <div class="recipe">
+        <img src="images/featured1.jpg" alt="Recipe 1">
+        <div class="recipe-details">
+          <h3>Recipe 1 Title</h3>
+          <p>Brief description of Recipe 1. This is a delicious and easy-to-make dish that everyone will love!</p>
+          <a href="#" class="read-more">View Recipe</a>
+        </div>
+      </div>
+      <div class="recipe">
+        <img src="images/featured2.jpg" alt="Recipe 2">
+        <div class="recipe-details">
+          <h3>Recipe 2 Title</h3>
+          <p>Brief description of Recipe 2. A flavorful dish that is perfect for any occasion.</p>
+          <a href="#" class="read-more">View Recipe</a>
+        </div>
+      </div>
+      <div class="recipe">
+        <img src="images/featured3.jpg" alt="Recipe 3">
+        <div class="recipe-details">
+          <h3>Recipe 3 Title</h3>
+          <p>Brief description of Recipe 3. An amazing recipe that is sure to impress your guests.</p>
+          <a href="#" class="read-more">View Recipe</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="reviews-section">
+      <h2>User Reviews</h2>
+      <div class="review">
+        <p><strong>User 1:</strong> This blog has the best recipes! I love trying new dishes.</p>
+      </div>
+      <div class="review">
+        <p><strong>User 2:</strong> Amazing content! The recipes are easy to follow and delicious.</p>
+      </div>
+      <div class="review">
+        <p><strong>User 3:</strong> I always look forward to the new posts. Keep it up!</p>
+      </div>
+    </section>
+
+    <div class="newsletter">
+      <h2>Subscribe to Our Newsletter</h2>
+      <p>Get the latest recipes and food stories delivered to your inbox!</p>
+      <form id="newsletter-form" onsubmit="subscribeNewsletter(event);">
+        <input type="email" placeholder="Enter your email" required>
+        <button type="submit">Subscribe</button>
+      </form>
+    </div>
+
+    <section class="faq-section">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq">
+        <h4>What types of recipes do you offer?</h4>
+        <p>We offer a variety of recipes ranging from appetizers to desserts, catering to all tastes.</p>
+      </div>
+      <div class="faq">
+        <h4>Can I submit my own recipes?</h4>
+        <p>Yes! We welcome submissions from our readers. Share your favorite recipes with us!</p>
+      </div>
+      <div class="faq">
+        <h4>How can I contact you?</h4>
+        <p>You can reach us via the contact form on our profile page.</p>
+      </div>
+    </section>
+
+    <div class="social-media">
+      <h3>Follow Us</h3>
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-pinterest"></i></a>
+    </div>
+
+    <footer>
+      <p>© 2024 Foodie Lover Blog - Made with ❤️ for food lovers.</p>
+    </footer>
+
   </div>
-
-  <!-- Newsletter Subscription Section -->
-  <div class="newsletter">
-    <h2>Subscribe to Our Newsletter</h2>
-    <p>Get the latest recipes and food stories delivered to your inbox!</p>
-    <form id="newsletter-form" onsubmit="subscribeNewsletter(event);">
-      <input type="email" placeholder="Enter your email" required>
-      <button type="submit">Subscribe</button>
-    </form>
-  </div>
-
-  <!-- Social Media Links -->
-  <div class="social-media">
-    <h3>Follow Us</h3>
-    <a href="#"><i class="fab fa-facebook-f"></i></a>
-    <a href="#"><i class="fab fa-twitter"></i></a>
-    <a href="#"><i class="fab fa-instagram"></i></a>
-    <a href="#"><i class="fab fa-pinterest"></i></a>
-  </div>
-
-  <footer>
-    <p>© 2024 Foodie Lover Blog - Made with ❤️ for food lovers.</p>
-  </footer>
 
   <script src="scripts.js"></script>
   <script>
@@ -255,10 +347,10 @@
       document.getElementById('carousel-images').style.transform = `translateX(${offset}%)`;
     }
 
-    // Automatically move to the next slide every 1 second
+    // Automatically move to the next slide every 3 seconds
     setInterval(() => {
       moveSlide(1);
-    }, 3000); // 1000 milliseconds = 1 second
+    }, 3000);
 
     // Newsletter subscription function
     function subscribeNewsletter(event) {
@@ -267,9 +359,19 @@
       alert(`Thank you for subscribing with the email: ${email}`);
       event.target.reset(); // Clear the form
     }
+
+    // FAQ toggle functionality
+    const faqTitles = document.querySelectorAll('.faq h4');
+    faqTitles.forEach((title) => {
+      title.addEventListener('click', () => {
+        const answer = title.nextElementSibling;
+        answer.style.display = answer.style.display === 'none' ? 'block' : 'none';
+      });
+    });
   </script>
 
   <!-- Font Awesome CDN for social media icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </body>
 </html>
+

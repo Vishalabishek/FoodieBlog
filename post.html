@@ -1,149 +1,314 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Post - Foodie Lover Blog</title>
-  <link rel="stylesheet" href="styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap" rel="stylesheet">
-  <style>
-    /* Additional Styles */
-    .post-content {
-        max-width: 800px;
-        margin: 20px auto;
-        padding: 20px;
-        background-color: #f9f9f9;
-        border-radius: 8px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post - Foodie Lover Blog</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+    <style>
+        /* Additional Styles */
+        .post-content {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
 
-    .post-content h2 {
-        font-size: 2em;
-        color: #6200ea;
-    }
+        .post-content h2 {
+            font-size: 2em;
+            color: #6200ea;
+        }
 
-    .post-image {
-        width: 100%;
-        border-radius: 8px;
-        margin-bottom: 20px;
-    }
+        .post-image {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
 
-    .comment-section {
-        margin-top: 30px;
-        padding: 20px;
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
+        .rating-section {
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-    .comment {
-        margin: 10px 0;
-        padding: 10px;
-        background-color: #f1f1f1;
-        border-left: 4px solid #6200ea;
-        border-radius: 5px;
-    }
+        .stars {
+            display: flex;
+            gap: 5px;
+        }
 
-    .comment h4 {
-        margin: 0;
-        font-size: 1.1em;
-        color: #333;
-    }
+        .stars span {
+            font-size: 2em;
+            cursor: pointer;
+        }
 
-    .comment p {
-        margin: 5px 0;
-        color: #666;
-    }
+        .average-rating {
+            font-size: 1.2em;
+            margin-left: 10px;
+            color: #6200ea;
+        }
 
-    #comments-list {
-        margin-top: 15px;
-    }
+        .like-section {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
 
-    /* Button Styles */
-    button {
-        background-color: #6200ea;
-        color: white;
-        border: none;
-        cursor: pointer;
-        padding: 10px 15px;
-        border-radius: 5px;
-        transition: background-color 0.3s;
-    }
+        .like-section button {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
 
-    button:hover {
-        background-color: #3700b3;
-    }
+        .like-section span {
+            font-size: 1.2em;
+            color: #6200ea;
+        }
 
-    textarea {
-        width: calc(100% - 22px);
-        padding: 10px;
-        margin-bottom: 10px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        resize: none;
-    }
-  </style>
+        .social-share {
+            display: flex;
+            justify-content: flex-start;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-share a {
+            text-decoration: none;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            transition: transform 0.3s;
+        }
+
+        .social-share a:hover {
+            transform: scale(1.1);
+        }
+
+        .social-share .twitter {
+            background-color: #1DA1F2;
+        }
+
+        .social-share .facebook {
+            background-color: #3b5998;
+        }
+
+        .social-share .whatsapp {
+            background-color: #25D366;
+        }
+
+        .featured-posts {
+            margin-top: 40px;
+            background-color: #f1f1f1;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .featured-posts h3 {
+            color: #6200ea;
+            margin-bottom: 15px;
+        }
+
+        .featured-posts ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .featured-posts ul li {
+            margin-bottom: 10px;
+        }
+
+        .featured-posts ul li a {
+            color: #333;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .featured-posts ul li a:hover {
+            color: #6200ea;
+        }
+
+        .comment-section {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .comment {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f1f1f1;
+            border-left: 4px solid #6200ea;
+            border-radius: 5px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .comment img {
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+        }
+
+        .comment h4 {
+            margin: 0;
+            font-size: 1.1em;
+            color: #333;
+        }
+
+        .comment p {
+            margin: 5px 0;
+            color: #666;
+        }
+
+        #comments-list {
+            margin-top: 15px;
+        }
+
+        button {
+            background-color: #6200ea;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #3700b3;
+        }
+
+        textarea {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            resize: none;
+        }
+    </style>
 </head>
+
 <body class="light-mode">
 
-  <!-- Navigation -->
-  <nav class="navbar">
-    <div class="logo">🍴 Foodie Lover Blog</div>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="post.html">Posts</a></li>
-      <li><a href="profile.html">Profile</a></li>
-      <li><a href="login.html">Login</a></li>
-    </ul>
-  </nav>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">🍴 Foodie Lover Blog</div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="post.html">Posts</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="login.html">Login</a></li>
+        </ul>
+    </nav>
 
-  <!-- Post Content -->
-  <section class="post-content">
-    <h2>The Best Street Food in Town</h2>
-    <img src="images/street-food.jpg" alt="Street Food" class="post-image"> 
-    <p>Street food is an integral part of the food culture in cities around the world. From sizzling kebabs to sweet desserts, each street corner has something special to offer. Here are some of the best street foods you should try:</p>
-    <ul>
-      <li><strong>Chaat:</strong> A savory snack originating from India, it's a mix of flavors and textures that will tantalize your taste buds.</li>
-      <li><strong>Tacos:</strong> Popular in Mexico, these handheld delights come with various fillings, from grilled meats to fresh veggies.</li>
-      <li><strong>Takoyaki:</strong> A famous Japanese snack made of batter and filled with octopus, served hot with a savory sauce.</li>
-      <li><strong>Crepes:</strong> French thin pancakes filled with sweet or savory ingredients, perfect for any time of the day.</li>
-    </ul>
-    <p>Posted by Vishal Abishek G on October 6, 2024</p>
+    <!-- Post Content -->
+    <section class="post-content">
+        <h2>The Best Indian Street Food You Must Try</h2>
+        <img src="images/street-food.jpg" alt="Indian Street Food" class="post-image">
+        <p>India is renowned for its rich and diverse street food culture, offering a vast array of flavors that delight food lovers. Here are some of the must-try street foods across India:</p>
+        <ul>
+            <li><strong>Chole Bhature:</strong> A popular North Indian dish, this combo of spicy chickpea curry with fluffy fried bread is a must-have for spice lovers.</li>
+            <li><strong>Pav Bhaji:</strong> This iconic Mumbai street food features a buttery, spicy vegetable curry served with toasted bread rolls.</li>
+            <li><strong>Pani Puri:</strong> Known as "golgappa" in many regions, these crispy puris filled with spicy tamarind water, potatoes, and chickpeas are an explosion of flavors.</li>
+            <li><strong>Dosa:</strong> Originating from South India, this thin rice crepe is served with spicy sambar and coconut chutney for a perfect meal.</li>
+            <li><strong>Vada Pav:</strong> A Mumbai favorite, this simple yet delicious snack is a spiced potato fritter sandwiched in a bun, often served with chutney.</li>
+        </ul>
+        <p>Posted by Vishal Abishek G on October 6, 2024</p>
 
-    <!-- Comment Section -->
-    <div class="comment-section">
-      <h3>Comments</h3>
-      <form id="comment-form" onsubmit="return addComment(event);">
-        <textarea name="comment" placeholder="Add a comment..." required></textarea><br>
-        <button type="submit">Add Comment</button>
-      </form>
-      <div id="comments-list"></div> <!-- Placeholder for comments -->
-    </div>
-  </section>
+        <!-- Rating Section -->
+        <div class="rating-section">
+            <label for="rating">Rate this post:</label>
+            <div class="stars" id="star-rating">
+                <span onclick="ratePost(1)" style="color: rgb(255, 208, 0);">★</span>
+                <span onclick="ratePost(2)" style="color: rgb(255, 208, 0);">★</span>
+                <span onclick="ratePost(3)" style="color: rgb(255, 208, 0);">★</span>
+                <span onclick="ratePost(4)" style="color: rgb(255, 208, 0);">★</span>
+                <span onclick="ratePost(5)" style="color: rgb(255, 208, 0);">★</span>
+            </div>
+            <span class="average-rating" id="average-rating">4.5/5</span>
+        </div>
 
-  <footer>
-    <p>© 2024 Foodie Lover Blog - Made with ❤️ for food lovers.</p>
-  </footer>
+        <!-- Like Section -->
+        <div class="like-section">
+            <button onclick="toggleLike()">
+                <span id="like-count" style="color: white;">123</span> ❤️ Like
+            </button>
+        </div>
 
-  <script src="scripts.js"></script>
-  <script>
-    // JavaScript to handle comments
-    function addComment(event) {
-      event.preventDefault(); // Prevent form submission
-      const commentText = event.target.comment.value;
-      const commentsList = document.getElementById('comments-list');
+        <!-- Social Sharing -->
+        <div class="social-share">
+            <a href="#" class="twitter">Tweet</a>
+            <a href="#" class="facebook">Share</a>
+            <a href="#" class="whatsapp">WhatsApp</a>
+        </div>
 
-      // Create a new comment element
-      const commentDiv = document.createElement('div');
-      commentDiv.classList.add('comment');
-      commentDiv.innerHTML = `<h4>Anonymous</h4><p>${commentText}</p>`;
+        <!-- Featured Posts -->
+        <div class="featured-posts">
+            <h3>Featured Posts</h3>
+            <ul>
+                <li><a href="post.html?id=3">Top 10 Dessert Places in India</a></li>
+                <li><a href="post.html?id=4">South Indian Breakfast Recipes to Try</a></li>
+                <li><a href="post.html?id=5">The Ultimate Guide to Street Food Festivals in India</a></li>
+            </ul>
+        </div>
 
-      // Append the comment to the comments list
-      commentsList.appendChild(commentDiv);
+        <!-- Comment Section -->
+        <div class="comment-section">
+            <h3>Comments</h3>
+            <form id="comment-form" onsubmit="return addComment(event);">
+                <textarea name="comment" placeholder="Add a comment..." required></textarea><br>
+                <button type="submit">Add Comment</button>
+            </form>
+            <div id="comments-list"></div> <!-- Placeholder for comments -->
+        </div>
+    </section>
 
-      // Clear the textarea
-      event.target.reset();
-    }
-  </script>
+    <footer>
+        <p>© 2024 Foodie Lover Blog - Made with ❤️ for food lovers.</p>
+    </footer>
+
+    <script src="scripts.js"></script>
+    <script>
+        // JavaScript to handle comments
+        function addComment(event) {
+            event.preventDefault();
+            const commentText = event.target.comment.value;
+            const commentsList = document.getElementById('comments-list');
+
+            // Create a new comment element
+            const commentDiv = document.createElement('div');
+            commentDiv.classList.add('comment');
+            commentDiv.innerHTML = `<img src="images/profile.jpg" alt="Avatar"><div><h4>Anonymous</h4><p>${commentText}</p></div>`;
+
+            // Append the comment to the comments list
+            commentsList.appendChild(commentDiv);
+
+            // Clear the textarea
+            event.target.reset();
+        }
+
+        // Like button functionality
+        function toggleLike() {
+            const likeCount = document.getElementById('like-count');
+            likeCount.textContent = parseInt(likeCount.textContent) + 1;
+        }
+
+        // Rating functionality
+        function ratePost(rating) {
+            const averageRating = document.getElementById('average-rating');
+            averageRating.textContent = `${rating}/5`;
+            alert(`You rated this post ${rating} stars!`);
+        }
+    </script>
+
 </body>
+
 </html>
