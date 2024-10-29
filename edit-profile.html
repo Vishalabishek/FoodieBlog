@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile - Foodie Lover Blog</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+
+    <!-- Firebase App (the core Firebase SDK) -->
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <!-- Firebase Authentication -->
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: #6200ea;
+            padding: 10px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar .logo {
+            font-size: 1.5em;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar ul li {
+            margin-left: 20px;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .navbar ul li a:hover {
+            color: #ffeb3b;
+        }
+
+        .edit-profile {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .edit-profile h2 {
+            text-align: center;
+            color: #6200ea;
+        }
+
+        .edit-profile label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .edit-profile input[type="text"],
+        .edit-profile input[type="email"],
+        .edit-profile textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        .save-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #6200ea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+
+        .save-button:hover {
+            background-color: #3700b3;
+        }
+
+        footer {
+            text-align: center;
+            margin: 20px 0;
+            color: #888;
+        }
+    </style>
+</head>
+
+<body class="light-mode">
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">🍴 Foodie Lover Blog</div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="post.html">Posts</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="login.html">Login</a></li>
+        </ul>
+    </nav>
+
+    <!-- Edit Profile Section -->
+    <div class="edit-profile" id="edit-profile">
+        <h2>Edit Your Profile</h2>
+        <label for="user-name">Name:</label>
+        <input type="text" id="user-name" placeholder="Enter your name">
+
+        <label for="user-email">Email:</label>
+        <input type="email" id="user-email" placeholder="Enter your email" disabled>
+
+        <label for="user-bio">Bio:</label>
+        <textarea id="user-bio" rows="4" placeholder="Tell us about yourself"></textarea>
+
+        <button class="save-button" id="save-button">Save Changes</button>
+    </div>
+
+    <footer>
+        <p>© 2024 Foodie Lover Blog - Made with ❤️ for food lovers.</p>
+    </footer>
+
+    <script type="module">
+        // Firebase configuration
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBiKqa0d1QHR4CmIw6gwGGqcDFw2lTxZr8",
+            authDomain: "foodieblog-4747a.firebaseapp.com",
+            projectId: "foodieblog-4747a",
+            storageBucket: "foodieblog-4747a.appspot.com",
+            messagingSenderId: "807471016720",
+            appId: "1:807471016720:web:d97964f188a984d25a9395",
+            measurementId: "G-6GXWZSNHD2"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // Load user info
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                document.getElementById('user-email').value = user.email; // Set email as disabled
+                const userDoc = await getDoc(doc(db, "users", user.uid)); // Assuming you have a 'users' collection
+                if (userDoc.exists()) {
+                    const data = userDoc.data();
+                    document.getElementById('user-name').value = data.name || "";
+                    document.getElementById('user-bio').value = data.bio || "";
+                }
+            } else {
+                window.location.href = "login.html";
+            }
+        });
+
+        // Save profile changes
+        document.getElementById('save-button').onclick = async () => {
+            const name = document.getElementById('user-name').value;
+            const bio = document.getElementById('user-bio').value;
+
+            const user = auth.currentUser;
+            if (user) {
+                await updateDoc(doc(db, "users", user.uid), {
+                    name: name,
+                    bio: bio
+                });
+                alert("Profile updated successfully!");
+            }
+        };
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Post - Foodie Lover Blog</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+    <script type="module">
+        // Import Firebase SDK
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
+        
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBiKqa0d1QHR4CmIw6gwGGqcDFw2lTxZr8",
+            authDomain: "foodieblog-4747a.firebaseapp.com",
+            databaseURL: "https://foodieblog-4747a-default-rtdb.firebaseio.com",
+            projectId: "foodieblog-4747a",
+            storageBucket: "foodieblog-4747a.appspot.com",
+            messagingSenderId: "807471016720",
+            appId: "1:807471016720:web:d97964f188a984d25a9395",
+            measurementId: "G-6GXWZSNHD2"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        // Create a function in the global scope
+        window.createPost = async function(event) {
+            event.preventDefault();
+            const title = document.getElementById('post-title').value;
+            const content = document.getElementById('post-content').value;
+
+            try {
+                const postId = Date.now(); // Use timestamp as a unique post ID
+                await set(ref(database, 'posts/' + postId), {
+                    title: title,
+                    content: content,
+                    timestamp: postId
+                });
+                alert('Post created successfully!');
+                window.location.href = 'post.html'; // Redirect to posts page
+            } catch (error) {
+                console.error('Error creating post:', error);
+                alert('Error creating post. Please try again.');
+            }
+        }
+    </script>
+</head>
+
+<body class="light-mode">
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">🍴 Foodie Lover Blog</div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="post.html">Posts</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="login.html">Login</a></li>
+        </ul>
+    </nav>
+
+    <!-- Create Post Form -->
+    <section class="post-content">
+        <h2>Create a New Post</h2>
+        <form onsubmit="createPost(event);">
+            <input type="text" id="post-title" placeholder="Post Title" required>
+            <textarea id="post-content" placeholder="Post Content" rows="10" required></textarea>
+            <button type="submit">Create Post</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>© 2024 Foodie Lover Blog - Made with ❤️ for food lovers.</p>
+    </footer>
+
+</body>
+
+</html>

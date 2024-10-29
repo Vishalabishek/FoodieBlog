@@ -7,7 +7,132 @@
     <title>Post - Foodie Lover Blog</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+
+    <!-- Firebase App (the core Firebase SDK) -->
+    <script type="module">
+        // Import Firebase libraries
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
+        import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBiKqa0d1QHR4CmIw6gwGGqcDFw2lTxZr8",
+            authDomain: "foodieblog-4747a.firebaseapp.com",
+            databaseURL: "https://foodieblog-4747a-default-rtdb.firebaseio.com",
+            projectId: "foodieblog-4747a",
+            storageBucket: "foodieblog-4747a.appspot.com",
+            messagingSenderId: "807471016720",
+            appId: "1:807471016720:web:d97964f188a984d25a9395",
+            measurementId: "G-6GXWZSNHD2"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        let comments = [];
+        let likeCount = 0;
+
+        // Fetch comments from Firebase when page loads
+        window.onload = () => {
+            const commentsRef = ref(database, 'posts/post-id/comments');
+            onValue(commentsRef, (snapshot) => {
+                comments = [];
+                snapshot.forEach(childSnapshot => {
+                    comments.push(childSnapshot.val());
+                });
+                renderComments();
+            });
+        };
+
+        // Function to submit a comment
+        window.submitComment = function() {
+            const commentInput = document.getElementById("comment-input");
+            const commentText = commentInput.value;
+
+            if (commentText.trim()) {
+                const commentId = Date.now();
+                const comment = {
+                    id: commentId,
+                    text: commentText,
+                    author: "User", // You can modify this to include actual user data
+                    timestamp: new Date().toISOString()
+                };
+
+                // Save comment to Firebase
+                set(ref(database, 'posts/post-id/comments/' + commentId), comment)
+                    .then(() => {
+                        comments.push(comment);
+                        renderComments();
+                        commentInput.value = ''; // Clear input
+                    })
+                    .catch((error) => {
+                        console.error("Error adding comment: ", error);
+                    });
+            } else {
+                alert("Please enter a comment.");
+            }
+        };
+
+        // Function to render comments
+        function renderComments() {
+            const commentsList = document.getElementById("comments-list");
+            commentsList.innerHTML = ''; // Clear existing comments
+
+            comments.forEach(comment => {
+                const commentDiv = document.createElement("div");
+                commentDiv.classList.add("comment");
+                commentDiv.innerHTML = `
+                    <img src="images/profile.jpg" alt="User Avatar">
+                    <div>
+                        <h4>${comment.author}</h4>
+                        <p>${comment.text}</p>
+                    </div>
+                `;
+                commentsList.appendChild(commentDiv);
+            });
+        }
+
+        // Function to like/unlike the post
+        window.toggleLike = function() {
+            likeCount++;
+            document.getElementById("like-count").innerText = likeCount;
+            document.getElementById("like-button").innerText = likeCount > 1 ? "👍 Liked" : "👍 Like";
+        };
+
+        // Function to rate the post
+        window.ratePost = function(rating) {
+            const averageRating = document.getElementById("average-rating");
+            // Simple average calculation
+            const newRating = (parseFloat(averageRating.innerText) + rating) / 2;
+            averageRating.innerText = newRating.toFixed(1);
+        };
+    async function pinPost(postId) {
+    await db.collection('posts').doc(postId).update({ pinned: true });
+    alert('Post pinned successfully!');
+}
+    </script>
+
     <style>
+        .create-post {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.create-post-button {
+    background-color: #6200ea;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.create-post-button:hover {
+    background-color: #3700b3;
+}
+
+        /* Your existing styles here */
         /* Additional Styles */
         .post-content {
             max-width: 800px;
@@ -100,37 +225,6 @@
             background-color: #25D366;
         }
 
-        .featured-posts {
-            margin-top: 40px;
-            background-color: #f1f1f1;
-            padding: 20px;
-            border-radius: 8px;
-        }
-
-        .featured-posts h3 {
-            color: #6200ea;
-            margin-bottom: 15px;
-        }
-
-        .featured-posts ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .featured-posts ul li {
-            margin-bottom: 10px;
-        }
-
-        .featured-posts ul li a {
-            color: #333;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .featured-posts ul li a:hover {
-            color: #6200ea;
-        }
-
         .comment-section {
             margin-top: 30px;
             padding: 20px;
@@ -208,106 +302,50 @@
             <li><a href="login.html">Login</a></li>
         </ul>
     </nav>
-
+    <div class="create-post">
+        <a href="create-post.html" class="create-post-button">Create a New Post</a>
+    </div>
+    
     <!-- Post Content -->
     <section class="post-content">
         <h2>The Best Indian Street Food You Must Try</h2>
         <img src="images/street-food.jpg" alt="Indian Street Food" class="post-image">
-        <p>India is renowned for its rich and diverse street food culture, offering a vast array of flavors that delight food lovers. Here are some of the must-try street foods across India:</p>
-        <ul>
-            <li><strong>Chole Bhature:</strong> A popular North Indian dish, this combo of spicy chickpea curry with fluffy fried bread is a must-have for spice lovers.</li>
-            <li><strong>Pav Bhaji:</strong> This iconic Mumbai street food features a buttery, spicy vegetable curry served with toasted bread rolls.</li>
-            <li><strong>Pani Puri:</strong> Known as "golgappa" in many regions, these crispy puris filled with spicy tamarind water, potatoes, and chickpeas are an explosion of flavors.</li>
-            <li><strong>Dosa:</strong> Originating from South India, this thin rice crepe is served with spicy sambar and coconut chutney for a perfect meal.</li>
-            <li><strong>Vada Pav:</strong> A Mumbai favorite, this simple yet delicious snack is a spiced potato fritter sandwiched in a bun, often served with chutney.</li>
-        </ul>
-        <p>Posted by Vishal Abishek G on October 6, 2024</p>
+        <p>India is renowned for its rich and diverse street food culture, offering a vast array of flavors and culinary delights. From spicy chaat to mouthwatering vada pav, here are some of the must-try dishes...</p>
 
         <!-- Rating Section -->
         <div class="rating-section">
-            <label for="rating">Rate this post:</label>
-            <div class="stars" id="star-rating">
-                <span onclick="ratePost(1)" style="color: rgb(255, 208, 0);">★</span>
-                <span onclick="ratePost(2)" style="color: rgb(255, 208, 0);">★</span>
-                <span onclick="ratePost(3)" style="color: rgb(255, 208, 0);">★</span>
-                <span onclick="ratePost(4)" style="color: rgb(255, 208, 0);">★</span>
-                <span onclick="ratePost(5)" style="color: rgb(255, 208, 0);">★</span>
+            <div class="stars">
+                <span onclick="ratePost(5)">⭐</span>
+                <span onclick="ratePost(4)">⭐</span>
+                <span onclick="ratePost(3)">⭐</span>
+                <span onclick="ratePost(2)">⭐</span>
+                <span onclick="ratePost(1)">⭐</span>
             </div>
-            <span class="average-rating" id="average-rating">4.5/5</span>
+            <span class="average-rating" id="average-rating">0.0</span>
         </div>
 
         <!-- Like Section -->
         <div class="like-section">
-            <button onclick="toggleLike()">
-                <span id="like-count" style="color: white;">123</span> ❤️ Like
-            </button>
+            <button id="like-button" onclick="toggleLike()">👍 Like</button>
+            <span id="like-count">0</span>
         </div>
 
-        <!-- Social Sharing -->
+        <!-- Social Share Section -->
         <div class="social-share">
-            <a href="#" class="twitter">Tweet</a>
-            <a href="#" class="facebook">Share</a>
-            <a href="#" class="whatsapp">WhatsApp</a>
+            <a href="#" class="twitter">Share on Twitter</a>
+            <a href="#" class="facebook">Share on Facebook</a>
+            <a href="#" class="whatsapp">Share on WhatsApp</a>
         </div>
 
-        <!-- Featured Posts -->
-        <div class="featured-posts">
-            <h3>Featured Posts</h3>
-            <ul>
-                <li><a href="post.html?id=3">Top 10 Dessert Places in India</a></li>
-                <li><a href="post.html?id=4">South Indian Breakfast Recipes to Try</a></li>
-                <li><a href="post.html?id=5">The Ultimate Guide to Street Food Festivals in India</a></li>
-            </ul>
-        </div>
 
         <!-- Comment Section -->
         <div class="comment-section">
             <h3>Comments</h3>
-            <form id="comment-form" onsubmit="return addComment(event);">
-                <textarea name="comment" placeholder="Add a comment..." required></textarea><br>
-                <button type="submit">Add Comment</button>
-            </form>
-            <div id="comments-list"></div> <!-- Placeholder for comments -->
+            <div id="comments-list"></div>
+            <textarea id="comment-input" rows="4" placeholder="Add your comment..."></textarea>
+            <button onclick="submitComment()">Submit Comment</button>
         </div>
     </section>
-
-    <footer>
-        <p>© 2024 Foodie Lover Blog - Made with ❤️ for food lovers.</p>
-    </footer>
-
-    <script src="scripts.js"></script>
-    <script>
-        // JavaScript to handle comments
-        function addComment(event) {
-            event.preventDefault();
-            const commentText = event.target.comment.value;
-            const commentsList = document.getElementById('comments-list');
-
-            // Create a new comment element
-            const commentDiv = document.createElement('div');
-            commentDiv.classList.add('comment');
-            commentDiv.innerHTML = `<img src="images/profile.jpg" alt="Avatar"><div><h4>Anonymous</h4><p>${commentText}</p></div>`;
-
-            // Append the comment to the comments list
-            commentsList.appendChild(commentDiv);
-
-            // Clear the textarea
-            event.target.reset();
-        }
-
-        // Like button functionality
-        function toggleLike() {
-            const likeCount = document.getElementById('like-count');
-            likeCount.textContent = parseInt(likeCount.textContent) + 1;
-        }
-
-        // Rating functionality
-        function ratePost(rating) {
-            const averageRating = document.getElementById('average-rating');
-            averageRating.textContent = `${rating}/5`;
-            alert(`You rated this post ${rating} stars!`);
-        }
-    </script>
 
 </body>
 

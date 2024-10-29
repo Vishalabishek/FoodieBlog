@@ -7,6 +7,14 @@
     <title>Profile - Foodie Lover Blog</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+
+    <!-- Firebase App (the core Firebase SDK) -->
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <!-- Firebase Authentication -->
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+    <!-- Firebase Firestore -->
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -128,6 +136,34 @@
             margin: 20px 0;
             color: #888;
         }
+
+        /* Additional Styles */
+        .points-section {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .badges {
+            margin-top: 20px;
+        }
+
+        .badges h3 {
+            margin-bottom: 10px;
+        }
+
+        .badge-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .badge-list li {
+            display: inline-block;
+            background-color: #6200ea;
+            color: white;
+            border-radius: 5px;
+            padding: 5px 10px;
+            margin: 5px;
+        }
     </style>
 </head>
 
@@ -145,15 +181,27 @@
     </nav>
 
     <!-- Profile Section -->
-    <div class="profile">
+    <div class="profile" id="profile">
         <img src="images/profile.jpg" alt="Profile Picture"> <!-- Replace with actual profile image path -->
         <h2>Your Profile</h2>
-        <p><strong>Name:</strong> Vishal Abishek G</p>
-        <p><strong>Email:</strong> vishal@gmail.com</p>
+        <p><strong>Name:</strong> <span id="user-name">Loading...</span></p>
+        <p><strong>Email:</strong> <span id="user-email">Loading...</span></p>
         <p><strong>Bio:</strong> Food lover and street food enthusiast. Always on the lookout for the best eats!</p>
 
+        <div class="points-section">
+            <h3>Your Points: <span id="user-points">0</span></h3>
+        </div>
+
+        <div class="badges">
+            <h3>Your Badges</h3>
+            <ul id="badge-list" class="badge-list"></ul>
+        </div>
+
+        <button class="edit-button" onclick="location.href='edit-profile.html'">Edit Profile</button>
+        <button class="edit-button" onclick="location.href='earn-points.html'">View Earning Points</button>
+
         <h3>Your Posts</h3>
-        <ul>
+        <ul id="user-posts">
             <li><a href="post.html?id=1">The Best Street Food in Town</a></li>
             <li><a href="post.html?id=2">5 Easy Vegan Recipes</a></li>
         </ul>
@@ -167,7 +215,7 @@
                 </div>
                 <div class="dish">
                     <h4>Spicy Pizza</h4>
-                    <img src="images/pizza.jpg" alt="Spicy Tacos"> <!-- Replace with actual dish image -->
+                    <img src="images/pizza.jpg" alt="Spicy Pizza"> <!-- Replace with actual dish image -->
                 </div>
                 <div class="dish">
                     <h4>Chocolate Cake</h4>
@@ -178,22 +226,74 @@
 
         <div class="recent-activities">
             <h3>Recent Activities</h3>
-            <ul>
+            <ul id="recent-activities">
                 <li>Commented on <a href="post.html?id=3">The Best Dessert Places</a></li>
                 <li>Liked <a href="post.html?id=4">Healthy Smoothie Recipes</a></li>
                 <li>Shared a post about <a href="post.html?id=5">Street Food Festivals</a></li>
             </ul>
         </div>
 
-        <button class="edit-button" onclick="location.href='edit-profile.html'">Edit Profile</button>
     </div>
 
     <footer>
         <p>© 2024 Foodie Lover Blog - Made with ❤️ for food lovers.</p>
     </footer>
 
-    <script src="scripts.js"></script>
+    <script type="module">
+        // Firebase configuration
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBiKqa0d1QHR4CmIw6gwGGqcDFw2lTxZr8",
+            authDomain: "foodieblog-4747a.firebaseapp.com",
+            projectId: "foodieblog-4747a",
+            storageBucket: "foodieblog-4747a.appspot.com",
+            messagingSenderId: "807471016720",
+            appId: "1:807471016720:web:d97964f188a984d25a9395",
+            measurementId: "G-6GXWZSNHD2"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // Get user info
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                const userId = user.uid;
+                document.getElementById("user-name").textContent = user.displayName || "User";
+                document.getElementById("user-email").textContent = user.email || "No email";
+
+                // Fetch user points and badges
+                const userDoc = doc(db, "users", userId);
+                const docSnap = await getDoc(userDoc);
+                
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    document.getElementById("user-points").textContent = data.points || 0;
+
+                    // Display badges
+                    const badges = data.badges || [];
+                    const badgeList = document.getElementById("badge-list");
+                    badgeList.innerHTML = ''; // Clear existing badges
+                    badges.forEach(badge => {
+                        const li = document.createElement('li');
+                        li.textContent = badge;
+                        badgeList.appendChild(li);
+                    });
+                } else {
+                    console.log("No such document!");
+                }
+            } else {
+                // No user is signed in
+                document.getElementById("user-name").textContent = "Guest";
+                document.getElementById("user-email").textContent = "No email";
+            }
+        });
+    </script>
 </body>
 
 </html>
-
